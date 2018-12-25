@@ -21,7 +21,7 @@ public class Task {
   private java.sql.Date date;
 
   @Column(name="is_urgent")
-  private long isUrgent;
+  private int isUrgent;
 
 
   public long getId() {
@@ -52,7 +52,7 @@ public class Task {
     return this.isUrgent;
   }
 
-  public void setIsUrgent(long isUrgent) {
+  public void setIsUrgent(int isUrgent) {
     this.isUrgent = isUrgent;
   }
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,5 +43,15 @@ public class GreetingController {
         long longId = id;
         Task task = taskRepository.findById(longId).get();
         return new ResponseEntity<Task>(task, HttpStatus.OK);
+    }
+
+    @RequestMapping("taskpart")
+    public List<Task> getTaskByPage(@RequestParam(value="first") Integer first) {
+//        return findByUserIdOrderBySNumber(userId, new PageRequest(0,20));
+//        @RequestParam(value="size") Integer size
+//        int firstPage = first/size;
+        List<Task> tasks = taskRepository.findAllByIsUrgentOrIsUrgent(
+                0, 1, new PageRequest(first,3));
+        return tasks;
     }
 }

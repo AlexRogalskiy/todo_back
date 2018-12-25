@@ -46,12 +46,11 @@ public class GreetingController {
     }
 
     @RequestMapping("taskpart")
-    public List<Task> getTaskByPage(@RequestParam(value="first") Integer first) {
-//        return findByUserIdOrderBySNumber(userId, new PageRequest(0,20));
-//        @RequestParam(value="size") Integer size
-//        int firstPage = first/size;
+    public List<Task> getTaskByPage(@RequestParam(value = "first") Integer first,
+                                    @RequestParam(value = "size") Integer size) {
+        int firstPage = first / size;
         List<Task> tasks = taskRepository.findAllByIsUrgentOrIsUrgent(
-                0, 1, new PageRequest(first,3));
+                0, 1, new PageRequest(firstPage, size));
         return tasks;
     }
 }
